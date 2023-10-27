@@ -17,6 +17,9 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <h3>
+        Updated to see if Automatic Code Deployment works in AWS Amplify 🚀
+      </h3>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
