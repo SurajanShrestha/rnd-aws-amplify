@@ -1,0 +1,10 @@
+{
+  "resourceName": "rndamplifydynamodb",
+  "tableName": "todo",
+  "partitionKey": {
+    "fieldName": "name",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

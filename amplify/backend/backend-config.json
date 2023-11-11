@@ -1,4 +1,20 @@
 {
+  "api": {
+    "rndamplifyapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "rndamplifylambdafunc"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "rndawsamplify471a4cc4": {
       "customAuth": false,
@@ -23,6 +39,51 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "rndamplifylambdafunc": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "rndamplifydynamodb"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_rndamplifylambdafunc_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rndamplifylambdafunc"
+        }
+      ]
+    },
+    "AMPLIFY_function_rndamplifylambdafunc_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "rndamplifylambdafunc"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "rndamplifydynamodb": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }
