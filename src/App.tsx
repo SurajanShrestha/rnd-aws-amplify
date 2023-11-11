@@ -20,6 +20,7 @@ function App() {
       {({ signOut, user }) => (
         <div>
           <div>
+            <>{console.log(user)}</>
             <a href="https://vitejs.dev" target="_blank">
               <Image
                 src={viteLogo}
@@ -39,6 +40,7 @@ function App() {
             </a>
           </div>
           <h1>User: {user?.username}</h1>
+          <h3>Email: {user?.attributes?.email}</h3>
           <Button onClick={signOut} variation="primary">
             Sign Out
           </Button>
