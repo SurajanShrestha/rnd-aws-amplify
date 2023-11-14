@@ -15,11 +15,16 @@ import {
   Authenticator,
   TextField,
   Text,
+  Flex,
+  View,
 } from "@aws-amplify/ui-react";
 
 // Amplify Backend
 import { Amplify, API } from "aws-amplify";
 import config from "./aws-exports";
+
+// Components
+import TaskActionMenu from "./components/TaskActionsMenu";
 
 Amplify.configure(config);
 
@@ -43,7 +48,7 @@ function App() {
   // Fetched Data
   const [data, setData] = useState<TodoData[]>([]);
 
-  // Get
+  // GET
   const getTodos = () => {
     API.get(apiName, path, myInit)
       .then((res) => {
@@ -52,7 +57,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  // Handle Submit
+  // POST
   const handleSubmit = () => {
     const init = {
       body: { name: todo },
@@ -85,7 +90,6 @@ function App() {
             </a>
           </div>
           <h1>User: {user?.username}</h1>
-          <h3>Email: {user?.attributes?.email}</h3>
 
           {/* Post */}
           <div className="box">
@@ -114,13 +118,20 @@ function App() {
           </Button>
 
           {/* List */}
-          <div className="box">
-            {data?.map((d, idx) => (
-              <Text key={idx}>
-                {idx + 1}. {d?.name}
-              </Text>
-            ))}
-          </div>
+          <View className="box" maxWidth={400}>
+            <Flex direction="column" alignItems="start" justifyContent="center">
+              {data?.map((d, idx) => (
+                <Flex justifyContent="space-between" width={"100%"}>
+                  <Text key={idx} textAlign={"left"}>
+                    👉 {d?.name}
+                  </Text>
+                  <View>
+                    <TaskActionMenu />
+                  </View>
+                </Flex>
+              ))}
+            </Flex>
+          </View>
         </div>
       )}
     </Authenticator>
